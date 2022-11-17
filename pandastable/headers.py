@@ -543,6 +543,11 @@ class RowHeader(Canvas):
                 self.bind("<Button-3>", self.handle_right_click)
             self.bind('<B1-Motion>', self.handle_mouse_drag)
             self.bind('<Shift-Button-1>', self.handle_left_shift_click)
+            self.setDefaults()
+        return
+
+    def setDefaults(self):
+        self.rowselectedcolor = '#0099CC'
         return
 
     def redraw(self, align='w', showkeys=False):
@@ -780,7 +785,7 @@ class RowHeader(Canvas):
         if tag==None:
             tag='rect'
         if color==None:
-            color='#0099CC'
+            color = self.rowselectedcolor
         if outline==None:
             outline='gray25'
         if delete == 1:
