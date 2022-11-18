@@ -825,6 +825,10 @@ class IndexHeader(Canvas):
         rowheader = self.table.rowheader
         self.width = rowheader.width
         self.delete('text','rect')
+
+        # assign background color before possibly returning
+        self.config(bg=self.bgcolor)
+
         if self.table.showindex == False:
             return
         xstart = 1
@@ -855,7 +859,6 @@ class IndexHeader(Canvas):
                 x=x+widths[i]
                 i+=1
         #w=sum(widths)
-        self.config(bg=self.bgcolor)
         return
 
     def handle_left_click(self, event):
