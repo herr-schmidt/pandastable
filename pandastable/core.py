@@ -180,7 +180,7 @@ class Table(Canvas):
         self.grid_color = '#ABB1AD'
         self.rowselectedcolor = '#E4DED4'
         self.multipleselectioncolor = '#E0F2F7'
-        self.boxoutlinecolor = '#084B8A'
+        self.boxoutlinecolor = "" # herr-schmidt: no box outside multicell selection
         self.colselectedcolor = '#e4e3e4'
         #self.colheadercolor = 'gray25'
         #self.rowheadercolor = 'gray75'
@@ -2280,6 +2280,8 @@ class Table(Canvas):
     def handle_left_ctrl_click(self, event):
         """Handle ctrl clicks for multiple row selections"""
 
+        return # herr-schmidt: avoid possibility of multiple rows selection
+
         rowclicked = self.get_row_clicked(event)
         colclicked = self.get_col_clicked(event)
         if 0 <= rowclicked < self.rows and 0 <= colclicked < self.cols:
@@ -2296,11 +2298,15 @@ class Table(Canvas):
     def handle_left_shift_click(self, event):
         """Handle shift click, for selecting multiple rows"""
 
+        return # herr-schmidt: avoid possibility of multiple rows selection
+
         self.handle_mouse_drag(event)
         return
 
     def handle_mouse_drag(self, event):
         """Handle mouse moved with button held down, multiple selections"""
+
+        return # herr-schmidt: avoid possibility of multiple rows selection
 
         if hasattr(self, 'cellentry'):
             self.cellentry.destroy()
@@ -3219,7 +3225,7 @@ class Table(Canvas):
             return
         self.delete('currentrect')
         if color == None:
-            color = 'gray25'
+            color = "" # herr-schmidt: do not want to highlight single cell
         w=2
         if row == None:
             return
