@@ -195,6 +195,8 @@ class Table(Canvas):
         self.rowcolors = pd.DataFrame()
         self.highlighted = None
         #self.bg = Style().lookup('TLabel.label', 'background')
+        self.statusbar_font = ("Helvetica", 10)
+        self.statusbar_font_color = "#A10000"
         return
 
     def setFont(self):
@@ -3795,18 +3797,18 @@ class statusBar(Frame):
         self.parentframe = parent
         self.parentapp = parentapp
         df = self.parentapp.model.df
-        sfont = ("Helvetica bold", 10)
-        clr = '#A10000'
+        sfont = parentapp.statusbar_font
+        clr = parentapp.statusbar_font_color
         self.rowsvar = StringVar()
         self.rowsvar.set(len(df))
         l=Label(self,textvariable=self.rowsvar,font=sfont,foreground=clr)
         l.pack(fill=X, side=LEFT)
-        Label(self,text='rows x',font=sfont,foreground=clr).pack(side=LEFT)
+        Label(self,text='righe x',font=sfont,foreground=clr).pack(side=LEFT)
         self.colsvar = StringVar()
         self.colsvar.set(len(df.columns))
         l=Label(self,textvariable=self.colsvar,font=sfont,foreground=clr)
         l.pack(fill=X, side=LEFT)
-        Label(self,text='columns',font=sfont,foreground=clr).pack(side=LEFT)
+        Label(self,text='colonne',font=sfont,foreground=clr).pack(side=LEFT)
         self.filenamevar = StringVar()
         l=Label(self,textvariable=self.filenamevar,font=sfont)
         l.pack(fill=X, side=RIGHT)
@@ -3814,13 +3816,13 @@ class statusBar(Frame):
         fr.pack(fill=Y,side=RIGHT)
 
         img = images.contract_col()
-        addButton(fr, 'Contract Cols', self.parentapp.contractColumns, img, 'contract columns', side=LEFT, padding=1)
+        addButton(fr, 'Contract Cols', self.parentapp.contractColumns, img, 'Contrai colonne', side=LEFT, padding=1)
         img = images.expand_col()
-        addButton(fr, 'Expand Cols', self.parentapp.expandColumns, img, 'expand columns', side=LEFT, padding=1)
+        addButton(fr, 'Expand Cols', self.parentapp.expandColumns, img, 'Espandi colonne', side=LEFT, padding=1)
         img = images.zoom_out()
-        addButton(fr, 'Zoom Out', self.parentapp.zoomOut, img, 'zoom out', side=LEFT, padding=1)
+        addButton(fr, 'Zoom Out', self.parentapp.zoomOut, img, 'Zoom out', side=LEFT, padding=1)
         img = images.zoom_in()
-        addButton(fr, 'Zoom In', self.parentapp.zoomIn, img, 'zoom in', side=LEFT, padding=1)
+        addButton(fr, 'Zoom In', self.parentapp.zoomIn, img, 'Zoom in', side=LEFT, padding=1)
         return
 
     def update(self):
